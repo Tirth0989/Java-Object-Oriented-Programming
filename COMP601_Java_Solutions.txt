@@ -1,0 +1,1249 @@
+Name:Tirth Patel
+
+Pledge of Honour: I pledge by honour that this is solely my own work.
+
+
+
+
+
+
+==Task 1 code==
+package Task_1;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class main {
+
+	void main() {
+
+		// formatting template for aligned columns
+		var fmt = "%-25s%-30s";
+
+		// headings
+		println(String.format(fmt, "Escape sequence", "Description"));
+
+		// printing dashes line
+		println("-".repeat(55));
+
+		// table rows
+		println(String.format(fmt, "\\n", "New line character"));
+		println(String.format(fmt, "\\t", "Horizontal tab character"));
+		println(String.format(fmt, "\\\"", "Double quote character"));
+		println(String.format(fmt, "\\b", "Backspace character"));
+
+	}
+}
+
+
+
+ 
+
+
+
+==Task 2 code==
+package task2;
+
+import java.util.Scanner;
+import static java.lang.System.out;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		// it reads the input value which are provided which standard input stream.
+		Scanner input = new Scanner(System.in);
+
+		// Step 1 asking for the radius
+		out.print("Enter circle radius: ");
+
+		// double used here the value not always come in the whole number it comes in the decimal number as well
+		double radius = input.nextDouble();
+
+		// Calculation of perimeter and area
+		double perimeter = 2 * radius * Math.PI; // perimeter formula
+		double area = radius * radius * Math.PI; // area formula
+
+		// for header output having all the alignment left and right side with margin
+		out.printf("%-10s%-15s%-15s%n", "Radius", "Perimeter", "Area");
+
+		// making the dashes format as per given sample output
+		String dashes = "-".repeat(45);
+		out.println(dashes);
+
+		// printing the results makes the round off of 2 decimal place
+		out.printf("%-10.2f%-15.2f%-15.2f%n",
+				radius, perimeter, area);
+
+		input.close();
+	}
+}
+ 
+
+
+
+
+
+
+
+==Task 3 code==
+
+package Task3;
+
+import module java.base;
+import static java.lang.IO.*;
+import static java.lang.Double.*;
+
+public class Main {
+
+	void main() {
+
+		double score = -1;
+
+		// keep asking until valid score entered
+		while (score < 0 || score > 100) {
+
+			score = parseDouble(readln("Enter a score: "));
+
+			if (score < 0 || score > 100) {
+				println("Invalid score");
+			}
+		}
+
+		// display grade according to score
+		if (score < 50) {
+			println("Score " + score + " will receive grade D");
+		}
+
+		else if (score < 70) {
+			println("Score " + score + " will receive grade C");
+		}
+
+		else if (score < 80) {
+			println("Score " + score + " will receive grade B");
+		}
+
+		else {
+			println("Score " + score + " will receive grade A");
+		}
+
+	}
+}
+
+ 
+
+
+
+
+
+
+==Task 4 code==
+
+ package Task4;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Main {
+
+	void main() {
+
+		// ask user to enter first line of colours
+		var firstLine = readln("Enter first line of colours: ");
+
+		// ask user to enter second line of colours
+		var secondLine = readln("Enter second line of colours: ");
+
+		// split lines into arrays
+		var firstColours = firstLine.split(",");
+		var secondColours = secondLine.split(",");
+
+		// create empty list to store overlapping colours
+		var overlapColours = new LinkedList<String>();
+
+		// nested loops to compare colours
+		for (var c1 : firstColours) {
+
+			for (var c2 : secondColours) {
+
+				// trim removes extra spaces
+				if (c1.trim().equalsIgnoreCase(c2.trim())) {
+
+					overlapColours.add(c1.trim());
+
+				}
+			}
+		}
+
+		// display number of colours in each list
+		println("You entered " + firstColours.length + " colours in first list");
+
+		println("You entered " + secondColours.length + " colours in second list");
+
+		// display overlap count
+		println("Number of overlapping colours: " + overlapColours.size());
+
+		// display overlapping colours
+		println("Overlapping colours are as follows:");
+
+		for (var colour : overlapColours) {
+
+			println(colour);
+
+		}
+
+	}
+}
+
+
+
+
+
+
+
+
+==Task 5 code==
+
+Main.java
+
+
+ package Task5;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Main {
+
+	void main() {
+
+		var notes = new LinkedList<Note>();
+
+		notes.add(new Note("D", 19));
+		notes.add(new Note("C", 20));
+		notes.add(new Note("F", 31));
+		notes.add(new Note("B", 45));
+		notes.add(new Note("C", 73));
+		notes.add(new Note("F", 13));
+		notes.add(new Note("B", 34));
+		notes.add(new Note("C", 53));
+
+		processNotes(notes);
+	}
+
+	public static void processNotes(List<Note> notes) {
+		int total = 0;
+
+		for (var note : notes) {
+			note.playNote();
+			total += note.getDuration();
+		}
+
+		println("Total duration: " + total + " seconds");
+	}
+}
+
+
+
+NOTE.JAVA.................
+
+
+package Task5;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Note {
+	// private field for pitch
+	private String pitch;
+	// private field for duration
+	private int duration;
+
+	// parameterized constructor
+	public Note(String pitch, int duration) {
+		this.pitch = pitch;
+		this.duration = duration;
+	}
+
+	// getter for pitch
+	public String getPitch() {
+		return pitch;
+	}
+
+	// setter for pitch
+	public void setPitch(String pitch) {
+		this.pitch = pitch;
+	}
+
+	// getter for duration
+	public int getDuration() {
+		return duration;
+	}
+
+	// setter for duration
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	// method to play note
+	public void playNote() {
+		println("The note " + pitch + " is played for " + duration + " seconds");
+	}
+}
+
+
+
+
+
+
+==Task 6 code==
+
+Main.java 
+
+
+package Task6;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Main {
+
+	void main() {
+
+		// create a list of leafy green vegetables
+		var veges = new LinkedList<LeafyGreen>();
+
+		// add 10 vegetables to the list
+		veges.add(new LeafyGreen(10, 3.5, "Cabbage"));
+		veges.add(new LeafyGreen(5, 2.94, "Lettuce"));
+		veges.add(new LeafyGreen(20, 5.45, "Broccoli"));
+		veges.add(new LeafyGreen(7, 1.94, "Lettuce"));
+		veges.add(new LeafyGreen(15, 2.8, "Lettuce"));
+		veges.add(new LeafyGreen(30, 2.5, "Cabbage"));
+		veges.add(new LeafyGreen(28, 4.4, "Broccoli"));
+		veges.add(new LeafyGreen(20, 5.5, "Cabbage"));
+		veges.add(new LeafyGreen(16, 3.9, "Broccoli"));
+		veges.add(new LeafyGreen(26, 4.8, "Broccoli"));
+
+		// call method to calculate stats
+		calculateStats(veges);
+	}
+
+	// method to calculate total cost and total weight of each type
+	public static void calculateStats(List<LeafyGreen> veges) {
+		double totalCost = 0.0;
+		double cabbageWeight = 0.0;
+		double broccoliWeight = 0.0;
+		double lettuceWeight = 0.0;
+
+		// loop through each vegetable in the list
+		for (var lg : veges) {
+			totalCost += lg.getCost();
+
+			if (lg.getType().equalsIgnoreCase("Cabbage")) {
+				cabbageWeight += lg.getWeight();
+			} else if (lg.getType().equalsIgnoreCase("Broccoli")) {
+				broccoliWeight += lg.getWeight();
+			} else if (lg.getType().equalsIgnoreCase("Lettuce")) {
+				lettuceWeight += lg.getWeight();
+			}
+		}
+
+		// print the results
+		println(String.format("Total vegetable cost: $%.1f", totalCost));
+		println(String.format("Total Cabbage weight: %.1f kg", cabbageWeight));
+		println(String.format("Total Broccoli weight: %.1f kg", broccoliWeight));
+		println(String.format("Total Lettuce weight: %.1f kg", lettuceWeight));
+	}
+}
+
+
+
+
+
+
+vegetable...............
+
+
+
+
+package Task6;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Vegetable {
+	// private field for weight
+	private double weight;
+	// private field for price
+	private double price;
+
+	// parameterized constructor
+	public Vegetable(double weight, double price) {
+		this.weight = weight;
+		this.price = price;
+	}
+
+	// getter for weight
+	public double getWeight() {
+		return weight;
+	}
+
+	// setter for weight
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	// getter for price
+	public double getPrice() {
+		return price;
+	}
+
+	// setter for price
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	// calculate the cost of the vegetable
+	public double getCost() {
+		return weight * price;
+	}
+}
+
+
+
+LeafyGreen.java...........
+
+
+package Task6;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class LeafyGreen extends Vegetable {
+	// private field for type
+	private String type;
+
+	// parameterized constructor
+	public LeafyGreen(double weight, double price, String type) {
+		super(weight, price);
+		this.type = type;
+	}
+
+	// getter for type
+	public String getType() {
+		return type;
+	}
+
+	// setter for type
+	public void setType(String type) {
+		this.type = type;
+	}
+}
+
+
+
+
+ 
+
+==Task 7 code==
+
+Main.java............. 
+
+
+
+
+package Task7;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Main {
+
+	void main() {
+
+		// create a list of shapes
+		var shapes = new LinkedList<Shape>();
+		shapes.add(new Shape("white"));
+		shapes.add(new Rectangle("red", 10, 6));
+		shapes.add(new Rectangle("black", 20, 9));
+		shapes.add(new Shape("orange"));
+
+		// show shape names
+		showShapeNames(shapes);
+
+		// first array of rectangles
+		Rectangle[] rectangleArray1 = {
+				new Rectangle("white", 4, 3),
+				new Rectangle("red", 9, 5),
+				new Rectangle("purple", 3, 6),
+				new Rectangle("orange", 15, 10),
+				new Rectangle("black", 4, 14),
+		};
+
+		// second array of rectangles
+		Rectangle[] rectangleArray2 = {
+				new Rectangle("pink", 3, 4),
+				new Rectangle("red", 10, 2),
+				new Rectangle("white", 8, 5),
+				new Rectangle("blue", 14, 4),
+				new Rectangle("bindle", 10, 15),
+		};
+
+		// count overlapping rectangles
+		countOverlapRectangles(rectangleArray1, rectangleArray2);
+	}
+
+	// print the type of each shape
+	public static void showShapeNames(List<Shape> shapes) {
+		for (var s : shapes) {
+			println(s.getShapeType());
+		}
+	}
+
+	// count overlapping colours and perimeters between two arrays
+	public static void countOverlapRectangles(Rectangle[] group1, Rectangle[] group2) {
+		var colours1 = new HashSet<String>();
+		var perimeters1 = new HashSet<Double>();
+
+		// store colour and perimeter from first array
+		for (var r : group1) {
+			colours1.add(r.getColour().trim().toLowerCase());
+			perimeters1.add(r.getPerimeter());
+		}
+
+		int colourOverlap = 0;
+		int perimeterOverlap = 0;
+
+		// compare with second array
+		for (var r : group2) {
+			if (colours1.contains(r.getColour().trim().toLowerCase())) {
+				colourOverlap++;
+			}
+			if (perimeters1.contains(r.getPerimeter())) {
+				perimeterOverlap++;
+			}
+		}
+
+		// print result
+		println("There are " + colourOverlap + " Rectangle objects with overlapping colour between the two arrays");
+		println("There are " + perimeterOverlap + " Rectangle objects with overlapping perimeter between the two arrays");
+	}
+}
+
+
+
+Rectangle.java............
+
+
+
+package Task7;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Rectangle extends Shape {
+	// private fields for height and width
+	private double height;
+	private double width;
+
+	// constructor with 3 parameters
+	public Rectangle(String colour, double height, double width) {
+		super(colour);
+		this.height = height;
+		this.width = width;
+	}
+
+	// getter for height
+	public double getHeight() {
+		return height;
+	}
+
+	// setter for height
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+	// getter for width
+	public double getWidth() {
+		return width;
+	}
+
+	// setter for width
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	// override method
+	@Override
+	public String getShapeType() {
+		return "I'm a Rectangle";
+	}
+
+	// method to calculate perimeter
+	public double getPerimeter() {
+		return 2 * (height + width);
+	}
+}
+
+
+
+Shape.java...................
+
+
+package Task7;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Shape {
+	// private field for colour
+	private String colour;
+
+	// constructor
+	public Shape(String colour) {
+		this.colour = colour;
+	}
+
+	// getter for colour
+	public String getColour() {
+		return colour;
+	}
+
+	// setter for colour
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
+
+	// method to return shape type
+	public String getShapeType() {
+		return "I'm a Shape";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+==Task 8 code==
+
+
+Main.java.................
+
+
+
+package Task8;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Main {
+
+	void main() {
+
+		// create a list of Bag objects
+		var bags = new LinkedList<Bag>();
+
+		// add bag objects to the list
+		bags.add(new Bag("Red", 3.20));
+		bags.add(new Bag("Blue", 4.30));
+		bags.add(new Bag("Black", 5.40));
+
+		BagApp bgapp = new BagApp();
+
+		double totalCapacity = bgapp.calcTotalCapacity(bags);
+
+		println(String.format("Total capacity: %.2f", totalCapacity));
+		println("Total number of bags: " + bags.size());
+	}
+}
+
+
+
+
+BagApp.java. ..............
+
+
+
+package Task8;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class BagApp {
+
+	public double calcTotalCapacity(List<Bag> bagList) {
+		// base case
+		if (bagList == null || bagList.size() == 0) {
+			return 0;
+		}
+
+		// recursive case
+		var subList = bagList.subList(1, bagList.size());
+		return bagList.get(0).getCapacity() + calcTotalCapacity(subList);
+	}
+}
+
+
+
+
+
+Bag.java................. 
+
+
+
+
+
+package Task8;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Bag {
+	// private field for colour
+	private String colour;
+	// private field for capacity
+	private double capacity;
+
+	// parameterized constructor
+	public Bag(String colour, double capacity) {
+		this.colour = colour;
+		this.capacity = capacity;
+	}
+
+	// getter for colour
+	public String getColour() {
+		return colour;
+	}
+
+	// setter for colour
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
+
+	// getter for capacity
+	public double getCapacity() {
+		return capacity;
+	}
+
+	// setter for capacity
+	public void setCapacity(double capacity) {
+		this.capacity = capacity;
+	}
+}
+
+
+
+
+ 
+
+==Task 9 code==
+
+Main.java............
+
+
+
+package Task9;
+
+import module java.base;
+import static java.lang.IO.*;
+
+import java.io.IOException;
+
+public class Main {
+
+	void main() {
+		var txtfile = "src/Task9/data.txt";
+
+		try {
+			var app = new GameApp(txtfile);
+			app.game();
+		} catch (IOException ioe) {
+			println(String.format("Perhaps missing text file: %s/%s?",
+					new Main().getClass().getPackage().getName(), txtfile));
+		}
+	}
+}
+
+
+
+
+
+
+
+GameApp.java...............
+
+
+
+package Task9;
+
+import module java.base;
+import static java.lang.IO.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+
+public class GameApp {
+	// list to store country objects
+	private List<Country> countryList = new LinkedList<>();
+
+	// constructor
+	public GameApp(String filename) throws IOException {
+		readData(filename);
+	}
+
+	// read file and store countries in list
+	public void readData(String filename) throws IOException {
+		var lines = Files.readAllLines(Paths.get(filename));
+
+		for (var line : lines) {
+			var items = line.split(",");
+
+			String name = items[0].trim();
+			String capital = items[1].trim();
+			int population = Integer.parseInt(items[2].trim());
+
+			countryList.add(new Country(name, capital, population));
+		}
+	}
+
+	// guessing game method
+	public void game() {
+		if (countryList == null || countryList.size() == 0) {
+			return;
+		}
+
+		var rand = new java.util.Random();
+		int index = rand.nextInt(countryList.size());
+
+		Country country = countryList.get(index);
+
+		String guess = readln("What's the capital of " + country.getName() + "? ");
+
+		if (guess.trim().equalsIgnoreCase(country.getCapital())) {
+			println("Well done!");
+		} else {
+			println("Incorrect. It's " + country.getCapital() + ".");
+		}
+
+		println(country.getName() + " is a country of " + country.getPopulation() + " million.");
+	}
+}
+
+
+
+
+country.java...............
+
+
+
+
+
+package Task9;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Country {
+	// private fields
+	private String name;
+	private String capital;
+	private int population;
+
+	// parameterized constructor
+	public Country(String name, String capital, int population) {
+		this.name = name;
+		this.capital = capital;
+		this.population = population;
+	}
+
+	// getter for name
+	public String getName() {
+		return name;
+	}
+
+	// setter for name
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	// getter for capital
+	public String getCapital() {
+		return capital;
+	}
+
+	// setter for capital
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+
+	// getter for population
+	public int getPopulation() {
+		return population;
+	}
+
+	// setter for population
+	public void setPopulation(int population) {
+		this.population = population;
+	}
+}
+
+
+
+
+
+data.txt.....................
+
+
+New Zealand,Wellington,5
+India,New Delhi,1380
+Germany,Berlin,83
+Thailand,Bangkok,69
+Greece,Athens,10
+Netherlands,Amsterdam,17
+
+
+
+
+
+
+
+ 
+
+==Task 10 code==
+
+
+
+
+Main.Java.............
+
+
+package Task10;
+
+import module java.base;
+import static java.lang.IO.*;
+
+import java.io.IOException;
+import java.util.List;
+
+public class Main {
+
+	void main() {
+
+		var txtfile = "src/Task10/data.txt";
+
+		try {
+
+			var app = new AudioBookApp(txtfile);
+
+			println("Shortest books:");
+
+			displayBooks(app.getShortestBooks());
+
+			println("Books published btw 2010-2020: "
+					+ app.countBooks());
+
+			app.randomBookList();
+
+		}
+
+		catch (IOException ioe) {
+
+			println(String.format(
+					"Perhaps missing text file: %s/%s?",
+					new Main().getClass().getPackage().getName(),
+					txtfile));
+		}
+	}
+
+	// display books method
+	public static void displayBooks(List<AudioBook> list) {
+
+		if (list != null && list.size() > 0) {
+
+			println(String.format("%-35s%-10s%-10s",
+					"Title", "Year", "Length"));
+
+			println("-".repeat(55));
+
+			for (var book : list) {
+
+				book.displayInfo();
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+Book.java...........
+
+
+
+package Task10;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class Book {
+	// private fields
+	private String name;
+	private int year;
+
+	// parameterized constructor
+	public Book(String name, int year) {
+		this.name = name;
+		this.year = year;
+	}
+
+	// getter for name
+	public String getName() {
+		return name;
+	}
+
+	// setter for name
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	// getter for year
+	public int getYear() {
+		return year;
+	}
+
+	// setter for year
+	public void setYear(int year) {
+		this.year = year;
+	}
+}
+
+
+
+
+
+AudioBookApp.java................
+
+
+
+package Task10;
+
+import module java.base;
+import static java.lang.IO.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
+public class AudioBookApp {
+
+	// list to store audiobook objects
+	private List<AudioBook> bookList = new LinkedList<>();
+
+	// getter for list
+	public List<AudioBook> getBookList() {
+		return bookList;
+	}
+
+	// constructor
+	public AudioBookApp(String filename) throws IOException {
+		readData(filename);
+	}
+
+	// read data from file
+	public void readData(String filename) throws IOException {
+
+		var lines = Files.readAllLines(Paths.get(filename));
+
+		for (var line : lines) {
+
+			var items = line.split(",");
+
+			String name = items[0].trim();
+			int year = Integer.parseInt(items[1].trim());
+			double length = Double.parseDouble(items[2].trim());
+
+			bookList.add(new AudioBook(name, year, length));
+		}
+	}
+
+	// get shortest books
+	public List<AudioBook> getShortestBooks() {
+
+		var shortestBooks = new LinkedList<AudioBook>();
+
+		if (bookList != null && bookList.size() > 0) {
+
+			double shortest = bookList.get(0).getLength();
+
+			// find shortest length
+			for (var book : bookList) {
+
+				if (book.getLength() < shortest) {
+					shortest = book.getLength();
+				}
+			}
+
+			// add shortest books into list
+			for (var book : bookList) {
+
+				if (book.getLength() == shortest) {
+					shortestBooks.add(book);
+				}
+			}
+		}
+
+		return shortestBooks;
+	}
+
+	// count books between 2010 and 2020
+	public int countBooks() {
+
+		int count = 0;
+
+		if (bookList != null && bookList.size() > 0) {
+
+			for (var book : bookList) {
+
+				if (book.getYear() >= 2010 &&
+						book.getYear() <= 2020) {
+
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
+
+	// divide books into random lists
+	public void randomBookList() {
+
+		var b1 = new LinkedList<AudioBook>();
+		var b2 = new LinkedList<AudioBook>();
+		var b3 = new LinkedList<AudioBook>();
+
+		var rand = new Random();
+
+		for (var book : bookList) {
+
+			int num = rand.nextInt(3) + 1;
+
+			if (num == 1) {
+				b1.add(book);
+			}
+
+			else if (num == 2) {
+				b2.add(book);
+			}
+
+			else {
+				b3.add(book);
+			}
+		}
+
+		// display list 1
+		println(b1.size() + " books in list #1:");
+
+		for (var book : b1) {
+			book.displayInfo();
+		}
+
+		// display list 2
+		println(b2.size() + " books in list #2:");
+
+		for (var book : b2) {
+			book.displayInfo();
+		}
+
+		// display list 3
+		println(b3.size() + " books in list #3:");
+
+		for (var book : b3) {
+			book.displayInfo();
+		}
+	}
+}
+
+
+
+
+
+
+
+AudioBook.java..............
+
+
+
+
+package Task10;
+
+import module java.base;
+import static java.lang.IO.*;
+
+public class AudioBook extends Book {
+	// private field for length
+	private double length;
+
+	// parameterized constructor
+	public AudioBook(String name, int year, double length) {
+		super(name, year);
+		this.length = length;
+	}
+
+	// getter for length
+	public double getLength() {
+		return length;
+	}
+
+	// setter for length
+	public void setLength(double length) {
+		this.length = length;
+	}
+
+	// display book information
+	public void displayInfo() {
+		println(String.format("%-35s%-10d%-10.1f",
+				getName(), getYear(), getLength()));
+	}
+}
+
+
+
+data.txt.......
+
+
+
+
+
+
+
+
+Killing floor,1997,15.4
+Zero day code,2019,12.5
+The killer across the table,2019,9.6
+West cork,2018,11
+Sleep walk,1985,10.3
+The end of the road,2001,9.6
+I'll be gone in the dark,2018,9.9.
+
